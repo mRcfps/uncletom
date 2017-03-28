@@ -1,0 +1,13 @@
+<a href="{% url 'market:home' %}">汤姆叔叔的外卖店</a>
+
+<p>
+    {% if user.is_authenticated %}
+      欢迎，{{ user.username }} - 
+      <a href="{% url 'users:logout' %}">注销</a>
+    {% else %}
+      <a href="{% url 'users:login' %}">登录</a>
+      <a href="{% url 'users:register' %}">注册</a>
+    {% endif %}
+</p>
+
+{% block content %} {% endblock content %}

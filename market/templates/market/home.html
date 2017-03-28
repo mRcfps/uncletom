@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% for shop in shops %}
+    <ul>
+        <li>
+            <img src="{{ shop.logo.url }}" height="100" width="100">
+            <a href="{% url 'market:shop' shop.id %}">{{ shop.name }}</a><br>
+            <small>销量 {{ shop.sale_num }} 单</small>
+            <small>评分 {{ shop.rating }} </small>
+        </li>
+    </ul>
+  {% empty %}
+    <p>您附近没有商家。</p>
+  {% endfor %}
+  
+  {% if has_shop %}
+    <a href="{% url 'shop_manager:shop-manage' %}">我的店铺</a>
+  {% else %}
+    <a href="{% url 'market:new-shop' %}">我要开店</a>
+  {% endif %}
+
+{% endblock content %}
