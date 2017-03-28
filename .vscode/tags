@@ -1,0 +1,273 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+0001_initial.py	../market/migrations/0001_initial.py	1;"	kind:file	line:1
+0002_auto_20170327_1119.py	../market/migrations/0002_auto_20170327_1119.py	1;"	kind:file	line:1
+0003_auto_20170327_2124.py	../market/migrations/0003_auto_20170327_2124.py	1;"	kind:file	line:1
+0004_auto_20170327_2154.py	../market/migrations/0004_auto_20170327_2154.py	1;"	kind:file	line:1
+ALLOWED_HOSTS	../uncletom/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
+AUTH_PASSWORD_VALIDATORS	../uncletom/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:90
+AppConfig	../market/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+AppConfig	../shop_manager/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+AppConfig	../users/apps.py	/^from django.apps import AppConfig$/;"	kind:namespace	line:1
+BASE_DIR	../uncletom/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
+CheckoutView	../market/views.py	/^class CheckoutView(View):$/;"	kind:class	line:72
+Comment	../market/admin.py	/^from .models import Shop, Food, Order, Comment$/;"	kind:namespace	line:3
+Comment	../market/models.py	/^class Comment(models.Model):$/;"	kind:class	line:48
+CreateView	../market/views.py	/^from django.views.generic import View, ListView, CreateView, DetailView$/;"	kind:namespace	line:2
+CreateView	../shop_manager/views.py	/^from django.views.generic import CreateView, TemplateView$/;"	kind:namespace	line:1
+CreateView	../users/views.py	/^from django.views.generic import CreateView$/;"	kind:namespace	line:1
+DATABASES	../uncletom/settings.py	/^DATABASES = {$/;"	kind:variable	line:79
+DEBUG	../uncletom/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+DetailView	../market/views.py	/^from django.views.generic import View, ListView, CreateView, DetailView$/;"	kind:namespace	line:2
+Food	../market/admin.py	/^from .models import Shop, Food, Order, Comment$/;"	kind:namespace	line:3
+Food	../market/models.py	/^class Food(models.Model):$/;"	kind:class	line:18
+Food	../market/views.py	/^from .models import Shop, Food, Order$/;"	kind:namespace	line:6
+Food	../shop_manager/forms.py	/^from market.models import Food$/;"	kind:namespace	line:3
+FoodDetailView	../market/views.py	/^class FoodDetailView(DetailView):$/;"	kind:class	line:57
+HomeView	../market/views.py	/^class HomeView(ListView):$/;"	kind:class	line:10
+HttpResponseRedirect	../market/views.py	/^from django.http import HttpResponseRedirect$/;"	kind:namespace	line:3
+HttpResponseRedirect	../shop_manager/views.py	/^from django.http import HttpResponseRedirect$/;"	kind:namespace	line:2
+HttpResponseRedirect	../users/views.py	/^from django.http import HttpResponseRedirect$/;"	kind:namespace	line:4
+INSTALLED_APPS	../uncletom/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
+LANGUAGE_CODE	../uncletom/settings.py	/^LANGUAGE_CODE = 'zh-hans'$/;"	kind:variable	line:109
+LOGIN_REDIRECT_URL	../uncletom/settings.py	/^LOGIN_REDIRECT_URL = '\/'$/;"	kind:variable	line:125
+ListView	../market/views.py	/^from django.views.generic import View, ListView, CreateView, DetailView$/;"	kind:namespace	line:2
+MEDIA_ROOT	../uncletom/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	kind:variable	line:127
+MEDIA_URL	../uncletom/settings.py	/^MEDIA_URL = '\/media\/'$/;"	kind:variable	line:129
+MIDDLEWARE	../uncletom/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:45
+MarketConfig	../market/apps.py	/^class MarketConfig(AppConfig):$/;"	kind:class	line:4
+Meta	../market/forms.py	/^    class Meta:$/;"	kind:class	line:7
+Meta	../shop_manager/forms.py	/^    class Meta:$/;"	kind:class	line:7
+Migration	../market/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:10
+Migration	../market/migrations/0002_auto_20170327_1119.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../market/migrations/0003_auto_20170327_2124.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:10
+Migration	../market/migrations/0004_auto_20170327_2154.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+NewFoodForm	../shop_manager/forms.py	/^class NewFoodForm(forms.ModelForm):$/;"	kind:class	line:6
+NewFoodForm	../shop_manager/views.py	/^from .forms import NewFoodForm$/;"	kind:namespace	line:5
+NewFoodView	../shop_manager/views.py	/^class NewFoodView(CreateView):$/;"	kind:class	line:19
+NewShopForm	../market/forms.py	/^class NewShopForm(forms.ModelForm):$/;"	kind:class	line:6
+NewShopForm	../market/views.py	/^from .forms import NewShopForm$/;"	kind:namespace	line:7
+NewShopView	../market/views.py	/^class NewShopView(CreateView):$/;"	kind:class	line:28
+Order	../market/admin.py	/^from .models import Shop, Food, Order, Comment$/;"	kind:namespace	line:3
+Order	../market/models.py	/^class Order(models.Model):$/;"	kind:class	line:30
+Order	../market/views.py	/^from .models import Shop, Food, Order$/;"	kind:namespace	line:6
+OrderForm	../market/forms.py	/^class OrderForm(forms.Form):$/;"	kind:class	line:13
+PayView	../market/views.py	/^class PayView(View):$/;"	kind:class	line:89
+ROOT_URLCONF	../uncletom/settings.py	/^ROOT_URLCONF = 'uncletom.urls'$/;"	kind:variable	line:55
+RegisterView	../users/urls.py	/^from .views import RegisterView$/;"	kind:namespace	line:4
+RegisterView	../users/views.py	/^class RegisterView(CreateView):$/;"	kind:class	line:8
+STATIC_URL	../uncletom/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:123
+STATUS_CHOICE	../market/models.py	/^    STATUS_CHOICE = ($/;"	kind:variable	line:34
+Shop	../market/admin.py	/^from .models import Shop, Food, Order, Comment$/;"	kind:namespace	line:3
+Shop	../market/forms.py	/^from .models import Shop$/;"	kind:namespace	line:3
+Shop	../market/models.py	/^class Shop(models.Model):$/;"	kind:class	line:6
+Shop	../market/views.py	/^from .models import Shop, Food, Order$/;"	kind:namespace	line:6
+ShopDetailView	../market/views.py	/^class ShopDetailView(ListView):$/;"	kind:class	line:40
+ShopManageView	../shop_manager/views.py	/^class ShopManageView(TemplateView):$/;"	kind:class	line:8
+ShopmanagerConfig	../shop_manager/apps.py	/^class ShopmanagerConfig(AppConfig):$/;"	kind:class	line:4
+TEMPLATES	../uncletom/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:57
+TIME_ZONE	../uncletom/settings.py	/^TIME_ZONE = 'Asia\/Shanghai'$/;"	kind:variable	line:111
+TemplateView	../shop_manager/views.py	/^from django.views.generic import CreateView, TemplateView$/;"	kind:namespace	line:1
+TestCase	../market/tests.py	/^from django.test import TestCase$/;"	kind:namespace	line:1
+TestCase	../shop_manager/tests.py	/^from django.test import TestCase$/;"	kind:namespace	line:1
+TestCase	../users/tests.py	/^from django.test import TestCase$/;"	kind:namespace	line:1
+USE_I18N	../uncletom/settings.py	/^USE_I18N = True$/;"	kind:variable	line:113
+USE_L10N	../uncletom/settings.py	/^USE_L10N = True$/;"	kind:variable	line:115
+USE_TZ	../uncletom/settings.py	/^USE_TZ = False$/;"	kind:variable	line:117
+User	../market/models.py	/^from django.contrib.auth.models import User$/;"	kind:namespace	line:3
+UserCreationForm	../users/views.py	/^from django.contrib.auth.forms import UserCreationForm$/;"	kind:namespace	line:5
+UsersConfig	../users/apps.py	/^class UsersConfig(AppConfig):$/;"	kind:class	line:4
+View	../market/views.py	/^from django.views.generic import View, ListView, CreateView, DetailView$/;"	kind:namespace	line:2
+WSGI_APPLICATION	../uncletom/settings.py	/^WSGI_APPLICATION = 'uncletom.wsgi.application'$/;"	kind:variable	line:73
+__init__.py	../market/__init__.py	1;"	kind:file	line:1
+__init__.py	../market/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../shop_manager/__init__.py	1;"	kind:file	line:1
+__init__.py	../shop_manager/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../uncletom/__init__.py	1;"	kind:file	line:1
+__init__.py	../users/__init__.py	1;"	kind:file	line:1
+__init__.py	../users/migrations/__init__.py	1;"	kind:file	line:1
+__str__	../market/models.py	/^    def __str__(self):$/;"	kind:member	line:14
+__str__	../market/models.py	/^    def __str__(self):$/;"	kind:member	line:26
+__str__	../market/models.py	/^    def __str__(self):$/;"	kind:member	line:55
+add_time	../market/models.py	/^    add_time = models.DateTimeField(auto_now_add=True)$/;"	kind:variable	line:53
+admin	../market/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin	../shop_manager/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin	../uncletom/urls.py	/^from django.contrib import admin$/;"	kind:namespace	line:2
+admin	../users/admin.py	/^from django.contrib import admin$/;"	kind:namespace	line:1
+admin.py	../market/admin.py	1;"	kind:file	line:1
+admin.py	../shop_manager/admin.py	1;"	kind:file	line:1
+admin.py	../users/admin.py	1;"	kind:file	line:1
+application	../uncletom/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	../market/apps.py	1;"	kind:file	line:1
+apps.py	../shop_manager/apps.py	1;"	kind:file	line:1
+apps.py	../users/apps.py	1;"	kind:file	line:1
+authenticate	../users/views.py	/^from django.contrib.auth import authenticate, login$/;"	kind:namespace	line:2
+body	../market/models.py	/^    body = models.TextField()$/;"	kind:variable	line:52
+choices	../market/models.py	/^        choices=STATUS_CHOICE,$/;"	kind:variable	line:42
+context_object_name	../market/views.py	/^    context_object_name = 'food'$/;"	kind:variable	line:60
+context_object_name	../market/views.py	/^    context_object_name = 'foods'$/;"	kind:variable	line:42
+context_object_name	../market/views.py	/^    context_object_name = 'shops'$/;"	kind:variable	line:13
+customer	../market/models.py	/^    customer = models.ForeignKey(User)$/;"	kind:variable	line:31
+customer	../market/models.py	/^    customer = models.ForeignKey(User)$/;"	kind:variable	line:50
+db	../market/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+db	../market/migrations/0003_auto_20170327_2124.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+default	../market/models.py	/^        default='paid',$/;"	kind:variable	line:43
+deletion	../market/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+deletion	../market/migrations/0003_auto_20170327_2124.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+dependencies	../market/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:14
+dependencies	../market/migrations/0002_auto_20170327_1119.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../market/migrations/0003_auto_20170327_2124.py	/^    dependencies = [$/;"	kind:variable	line:12
+dependencies	../market/migrations/0004_auto_20170327_2154.py	/^    dependencies = [$/;"	kind:variable	line:10
+django	../manage.py	/^            import django$/;"	kind:namespace	line:14
+django	../market/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+django	../market/migrations/0003_auto_20170327_2124.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+execute_from_command_line	../manage.py	/^        from django.core.management import execute_from_command_line$/;"	kind:namespace	line:8
+field	../market/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='market.Food'),$/;"	kind:variable	line:67
+field	../market/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='market.Shop'),$/;"	kind:variable	line:62
+field	../market/migrations/0002_auto_20170327_1119.py	/^            field=models.ImageField(upload_to='img'),$/;"	kind:variable	line:18
+field	../market/migrations/0003_auto_20170327_2124.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='shop', to=settings.AUTH_USER_MODEL),$/;"	kind:variable	line:20
+field	../market/migrations/0004_auto_20170327_2154.py	/^            field=models.ManyToManyField(to='market.Food'),$/;"	kind:variable	line:22
+fields	../market/forms.py	/^        fields = ['name', 'logo']$/;"	kind:variable	line:9
+fields	../market/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:21
+fields	../market/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:30
+fields	../market/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:40
+fields	../market/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:50
+fields	../shop_manager/forms.py	/^        fields = ['name', 'price', 'photo']$/;"	kind:variable	line:9
+food	../market/models.py	/^    food = models.ForeignKey(Food)$/;"	kind:variable	line:49
+food_list	../market/models.py	/^    food_list = models.ManyToManyField(Food)$/;"	kind:variable	line:32
+form_class	../market/views.py	/^    form_class = NewShopForm$/;"	kind:variable	line:30
+form_class	../shop_manager/views.py	/^    form_class = NewFoodForm$/;"	kind:variable	line:21
+form_class	../users/views.py	/^    form_class = UserCreationForm$/;"	kind:variable	line:10
+form_valid	../market/views.py	/^    def form_valid(self, form):$/;"	kind:member	line:32
+form_valid	../shop_manager/views.py	/^    def form_valid(self, form):$/;"	kind:member	line:23
+form_valid	../users/views.py	/^    def form_valid(self, form):$/;"	kind:member	line:12
+forms	../market/forms.py	/^from django import forms$/;"	kind:namespace	line:1
+forms	../shop_manager/forms.py	/^from django import forms$/;"	kind:namespace	line:1
+forms.py	../market/forms.py	1;"	kind:file	line:1
+forms.py	../shop_manager/forms.py	1;"	kind:file	line:1
+get_context_data	../market/views.py	/^    def get_context_data(self, **kwargs):$/;"	kind:member	line:15
+get_context_data	../market/views.py	/^    def get_context_data(self, **kwargs):$/;"	kind:member	line:50
+get_context_data	../market/views.py	/^    def get_context_data(self, **kwargs):$/;"	kind:member	line:62
+get_context_data	../shop_manager/views.py	/^    def get_context_data(self, **kwargs):$/;"	kind:member	line:11
+get_queryset	../market/views.py	/^    def get_queryset(self):$/;"	kind:member	line:47
+get_shop	../market/views.py	/^    def get_shop(self):$/;"	kind:member	line:44
+get_wsgi_application	../uncletom/wsgi.py	/^from django.core.wsgi import get_wsgi_application$/;"	kind:namespace	line:12
+http_method_names	../market/views.py	/^    http_method_names = ('post', )$/;"	kind:variable	line:73
+http_method_names	../market/views.py	/^    http_method_names = ('post', )$/;"	kind:variable	line:90
+include	../uncletom/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:1
+initial	../market/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:12
+labels	../market/forms.py	/^        labels = {'name': '餐厅名字', 'logo': 'Logo'}$/;"	kind:variable	line:10
+labels	../shop_manager/forms.py	/^        labels = {$/;"	kind:variable	line:10
+login	../users/urls.py	/^from django.contrib.auth.views import login, logout$/;"	kind:namespace	line:2
+login	../users/views.py	/^from django.contrib.auth import authenticate, login$/;"	kind:namespace	line:2
+logo	../market/models.py	/^    logo = models.ImageField(upload_to='img')$/;"	kind:variable	line:12
+logout	../users/urls.py	/^from django.contrib.auth.views import login, logout$/;"	kind:namespace	line:2
+manage.py	../manage.py	1;"	kind:file	line:1
+max_length	../market/models.py	/^        max_length=10,$/;"	kind:variable	line:41
+migrations	../market/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:6
+migrations	../market/migrations/0002_auto_20170327_1119.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+migrations	../market/migrations/0003_auto_20170327_2124.py	/^from django.db import migrations, models$/;"	kind:namespace	line:6
+migrations	../market/migrations/0004_auto_20170327_2154.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+model	../market/forms.py	/^        model = Shop$/;"	kind:variable	line:8
+model	../market/views.py	/^    model = Food$/;"	kind:variable	line:59
+model	../market/views.py	/^    model = Shop$/;"	kind:variable	line:12
+model	../shop_manager/forms.py	/^        model = Food$/;"	kind:variable	line:8
+model_name	../market/migrations/0001_initial.py	/^            model_name='comment',$/;"	kind:variable	line:65
+model_name	../market/migrations/0001_initial.py	/^            model_name='food',$/;"	kind:variable	line:60
+model_name	../market/migrations/0002_auto_20170327_1119.py	/^            model_name='shop',$/;"	kind:variable	line:16
+model_name	../market/migrations/0003_auto_20170327_2124.py	/^            model_name='shop',$/;"	kind:variable	line:18
+model_name	../market/migrations/0004_auto_20170327_2154.py	/^            model_name='order',$/;"	kind:variable	line:16
+model_name	../market/migrations/0004_auto_20170327_2154.py	/^            model_name='order',$/;"	kind:variable	line:20
+models	../market/migrations/0001_initial.py	/^from django.db import migrations, models$/;"	kind:namespace	line:6
+models	../market/migrations/0001_initial.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+models	../market/migrations/0002_auto_20170327_1119.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	../market/migrations/0003_auto_20170327_2124.py	/^from django.db import migrations, models$/;"	kind:namespace	line:6
+models	../market/migrations/0003_auto_20170327_2124.py	/^import django.db.models.deletion$/;"	kind:namespace	line:7
+models	../market/migrations/0004_auto_20170327_2154.py	/^from django.db import migrations, models$/;"	kind:namespace	line:5
+models	../market/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models	../shop_manager/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models	../users/models.py	/^from django.db import models$/;"	kind:namespace	line:1
+models.py	../market/models.py	1;"	kind:file	line:1
+models.py	../shop_manager/models.py	1;"	kind:file	line:1
+models.py	../users/models.py	1;"	kind:file	line:1
+name	../market/apps.py	/^    name = 'market'$/;"	kind:variable	line:5
+name	../market/migrations/0001_initial.py	/^            name='Comment',$/;"	kind:variable	line:20
+name	../market/migrations/0001_initial.py	/^            name='Food',$/;"	kind:variable	line:29
+name	../market/migrations/0001_initial.py	/^            name='Order',$/;"	kind:variable	line:39
+name	../market/migrations/0001_initial.py	/^            name='Shop',$/;"	kind:variable	line:49
+name	../market/migrations/0001_initial.py	/^            name='food',$/;"	kind:variable	line:66
+name	../market/migrations/0001_initial.py	/^            name='seller',$/;"	kind:variable	line:61
+name	../market/migrations/0002_auto_20170327_1119.py	/^            name='logo',$/;"	kind:variable	line:17
+name	../market/migrations/0003_auto_20170327_2124.py	/^            name='owner',$/;"	kind:variable	line:19
+name	../market/migrations/0004_auto_20170327_2154.py	/^            name='food',$/;"	kind:variable	line:17
+name	../market/migrations/0004_auto_20170327_2154.py	/^            name='food_list',$/;"	kind:variable	line:21
+name	../market/models.py	/^    name = models.CharField(max_length=50)$/;"	kind:variable	line:21
+name	../market/models.py	/^    name = models.CharField(max_length=50)$/;"	kind:variable	line:9
+name	../market/urls.py	/^        name='food-detail'$/;"	kind:variable	line:23
+name	../market/urls.py	/^        name='shop'$/;"	kind:variable	line:16
+name	../shop_manager/apps.py	/^    name = 'shopmanager'$/;"	kind:variable	line:5
+name	../users/apps.py	/^    name = 'users'$/;"	kind:variable	line:5
+operations	../market/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:18
+operations	../market/migrations/0002_auto_20170327_1119.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../market/migrations/0003_auto_20170327_2124.py	/^    operations = [$/;"	kind:variable	line:16
+operations	../market/migrations/0004_auto_20170327_2154.py	/^    operations = [$/;"	kind:variable	line:14
+os	../manage.py	/^import os$/;"	kind:namespace	line:2
+os	../uncletom/settings.py	/^import os$/;"	kind:namespace	line:13
+os	../uncletom/wsgi.py	/^import os$/;"	kind:namespace	line:10
+owner	../market/models.py	/^    owner = models.ForeignKey(User, related_name='shop')$/;"	kind:variable	line:7
+photo	../market/models.py	/^    photo = models.ImageField(upload_to='img')$/;"	kind:variable	line:24
+post	../market/views.py	/^    def post(self, request):$/;"	kind:member	line:75
+post	../market/views.py	/^    def post(self, request):$/;"	kind:member	line:92
+price	../market/models.py	/^    price = models.FloatField(default=0)$/;"	kind:variable	line:22
+rating	../market/models.py	/^    rating = models.FloatField(default=5.0)$/;"	kind:variable	line:11
+render	../market/views.py	/^from django.shortcuts import render$/;"	kind:namespace	line:1
+reverse	../market/views.py	/^from django.core.urlresolvers import reverse$/;"	kind:namespace	line:4
+reverse	../shop_manager/views.py	/^from django.core.urlresolvers import reverse$/;"	kind:namespace	line:3
+reverse	../users/views.py	/^from django.core.urlresolvers import reverse$/;"	kind:namespace	line:3
+sale_num	../market/models.py	/^    sale_num = models.IntegerField(default=0)$/;"	kind:variable	line:10
+sale_num	../market/models.py	/^    sale_num = models.IntegerField(default=0)$/;"	kind:variable	line:23
+seller	../market/models.py	/^    seller = models.ForeignKey(Shop)$/;"	kind:variable	line:19
+settings	../market/migrations/0001_initial.py	/^from django.conf import settings$/;"	kind:namespace	line:5
+settings	../market/migrations/0003_auto_20170327_2124.py	/^from django.conf import settings$/;"	kind:namespace	line:5
+settings	../uncletom/urls.py	/^from django.conf import settings$/;"	kind:namespace	line:3
+settings.py	../uncletom/settings.py	1;"	kind:file	line:1
+static	../uncletom/urls.py	/^from django.conf.urls.static import static$/;"	kind:namespace	line:4
+status	../market/models.py	/^    status = models.CharField($/;"	kind:variable	line:40
+sys	../manage.py	/^import sys$/;"	kind:namespace	line:3
+template_name	../market/views.py	/^    template_name = 'market\/food.html'$/;"	kind:variable	line:58
+template_name	../market/views.py	/^    template_name = 'market\/home.html'$/;"	kind:variable	line:11
+template_name	../market/views.py	/^    template_name = 'market\/new_shop.html'$/;"	kind:variable	line:29
+template_name	../market/views.py	/^    template_name = 'market\/shop.html'$/;"	kind:variable	line:41
+template_name	../shop_manager/views.py	/^    template_name = 'shop_manager\/new_food.html'$/;"	kind:variable	line:20
+template_name	../shop_manager/views.py	/^    template_name = 'shop_manager\/shop_manage.html'$/;"	kind:variable	line:9
+template_name	../users/views.py	/^    template_name = 'users\/register.html'$/;"	kind:variable	line:9
+tests.py	../market/tests.py	1;"	kind:file	line:1
+tests.py	../shop_manager/tests.py	1;"	kind:file	line:1
+tests.py	../users/tests.py	1;"	kind:file	line:1
+time	../market/models.py	/^    time = models.DateTimeField(auto_now_add=True)$/;"	kind:variable	line:45
+unicode_literals	../market/migrations/0001_initial.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+unicode_literals	../market/migrations/0002_auto_20170327_1119.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+unicode_literals	../market/migrations/0003_auto_20170327_2124.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+unicode_literals	../market/migrations/0004_auto_20170327_2154.py	/^from __future__ import unicode_literals$/;"	kind:namespace	line:3
+url	../market/urls.py	/^from django.conf.urls import url$/;"	kind:namespace	line:1
+url	../shop_manager/urls.py	/^from django.conf.urls import url$/;"	kind:namespace	line:1
+url	../uncletom/urls.py	/^from django.conf.urls import url, include$/;"	kind:namespace	line:1
+url	../users/urls.py	/^from django.conf.urls import url$/;"	kind:namespace	line:1
+urlpatterns	../market/urls.py	/^urlpatterns = [$/;"	kind:variable	line:5
+urlpatterns	../shop_manager/urls.py	/^urlpatterns = [$/;"	kind:variable	line:6
+urlpatterns	../uncletom/urls.py	/^urlpatterns = [$/;"	kind:variable	line:6
+urlpatterns	../users/urls.py	/^urlpatterns = [$/;"	kind:variable	line:6
+urls.py	../market/urls.py	1;"	kind:file	line:1
+urls.py	../shop_manager/urls.py	1;"	kind:file	line:1
+urls.py	../uncletom/urls.py	1;"	kind:file	line:1
+urls.py	../users/urls.py	1;"	kind:file	line:1
+views	../market/urls.py	/^from . import views$/;"	kind:namespace	line:3
+views	../shop_manager/urls.py	/^from . import views$/;"	kind:namespace	line:3
+views.py	../market/views.py	1;"	kind:file	line:1
+views.py	../shop_manager/views.py	1;"	kind:file	line:1
+views.py	../users/views.py	1;"	kind:file	line:1
+wsgi.py	../uncletom/wsgi.py	1;"	kind:file	line:1

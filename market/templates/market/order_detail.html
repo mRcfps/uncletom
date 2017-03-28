@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <form action="{% url 'market:pay' %}" method="post">
+    {% csrf_token %}
+    {% for food in food_list %}
+      <li>
+        <input type="hidden" name="{{ food.name }}" value="{{ food.id }}" />
+        {{ food.name }} - ￥{{ food.price }}
+      </li>
+    {% endfor %}
+    <b>总价: ￥{{ total_price }}</b>
+    <input type="submit" value="支付">
+  </form>
+{% endblock content %}

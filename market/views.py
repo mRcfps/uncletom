@@ -1,8 +1,9 @@
-from django.views.generic import View, ListView, CreateView, DetailView
+from django.shortcuts import render
+from django.views.generic import View, TemplateView, ListView, CreateView, DetailView
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from .models import Shop, Food
+from .models import Shop, Food, Order
 from .forms import NewShopForm
 
 
@@ -13,9 +14,13 @@ class HomeView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super(HomeView, self).get_context_data(**kwargs)
+        user = self.request.user
 
-        # check out whether the user has a shop
-        ctx['has_shop'] = True if self.request.user.shop.all() else False
+        # check out whether the user has logged in and has a shop
+        if user.is_authenticated and user.shop.all():
+            ctx['has_shop'] = True
+        else:
+            ctx['has_shop'] = False
 
         return ctx
 
@@ -65,7 +70,83 @@ class FoodDetailView(DetailView):
 
 
 class CheckoutView(View):
-    template_name = 'market/checkout.html'
+    http_method_names = ('post', )
 
     def post(self, request):
-        pass
+        # get the food list from the posted food_id
+        food_list = []
+        for food_name, food_id in request.POST.items():
+            if food_name != 'csrfmiddlewaretoken':
+                food_list.append(Food.objects.get(pk=food_id))
+
+        total_price = 0
+        for food in food_list:
+            total_price += food.price
+        context = {'food_list': food_list, 'total_price': total_price}
+
+        return render(request, 'market/order_detail.html', context)
+
+
+class PayView(View):
+    http_method_names = ('post', )
+
+    def post(self, request):
+        new_order = Order(customer=request.user, status='paid')
+        new_order.save()
+
+        shop = Shop()
+
+        for food_name, food_id in request.POST.items():
+            if food_name != 'csrfmiddlewaretoken':
+                food = Food.objects.get(pk=food_id)
+                shop = food.seller
+                new_order.food_list.add(food)
+                food.sale_num += 1
+                food.save()
+
+        shop.sale_num += 1
+        shop.save()
+
+        return render(request, 'market/pay_success.html')
+
+
+class MyOrdersView(TemplateView):
+    template_name = 'market/my_orders.html'
+
+    def get_orders_with_sellers(self, orders):
+        '''Return a list of orders, each attached with its seller'''
+        order_list = []
+        for order in orders:
+            fake_order = {}
+            fake_order['seller'] = order.food_list.all()[0].seller
+            fake_order['food_list'] = list(order.food_list.all())
+            fake_order['time'] = order.time
+            order_list.append(fake_order)
+        return order_list
+
+    def get_context_data(self, **kwargs):
+        ctx = super(MyOrdersView, self).get_context_data(**kwargs)
+
+        # Get orders with status 'paid'
+        paid_orders = Order.objects.filter(
+            customer=self.request.user,
+            status='paid',
+        ).order_by('-time')
+
+        # Get orders with status 'accepted'
+        accepted_orders = Order.objects.filter(
+            customer=self.request.user,
+            status='accepted',
+        ).order_by('-time')
+
+        # Get orders with status 'finished'
+        finished_orders = Order.objects.filter(
+            customer=self.request.user,
+            status='finished',
+        ).order_by('-time')
+
+        ctx['paid_orders'] = self.get_orders_with_sellers(paid_orders)
+        ctx['accepted_orders'] = self.get_orders_with_sellers(accepted_orders)
+        ctx['finished_orders'] = self.get_orders_with_sellers(finished_orders)
+
+        return ctx

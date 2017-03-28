@@ -3,17 +3,22 @@
 {% block content %}
   <h2>欢迎来到{{ shop.name }}!</h2>
 
+  <form action="{% url 'market:checkout' %}" method="post">
+    {% csrf_token %}
     {% for food in foods %}
     <li>
-        <a href="{% url 'market:food-detail' shop.id food.id %}">
-            <img src="{{ food.photo.url }}" height="50" width="50" />
-            <p>{{ food.name }}</p>
-        </a>
-        <p>￥{{ food.price }}</p>
-        <small>共销售{{ food.sale_num }}单</small>
+      <input type="checkbox" name="{{ food.name }}" value="{{ food.id }}">
+      <a href="{% url 'market:food-detail' shop.id food.id %}">
+          <img src="{{ food.photo.url }}" height="50" width="50" />
+          <p>{{ food.name }}</p>
+      </a>
+      <p>￥{{ food.price }}</p>
+      <small>共销售{{ food.sale_num }}单</small>
     </li>
-  {% empty %}
-    <p>这家店什么吃的都没！</p>
-  {% endfor %}
-  
+    {% empty %}
+      <p>这家店什么吃的都没！</p>
+    {% endfor %}
+    <input type="submit" value="下单">
+  </form>
+
 {% endblock content %}

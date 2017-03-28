@@ -44,6 +44,17 @@ class Order(models.Model):
     )
     time = models.DateTimeField(auto_now_add=True)
 
+    def show_food_list(self):
+        '''A method to fetch the food list and return a string,
+        used in OrderAdmin in this project.'''
+        result = ''
+        for food in self.food_list.all():
+            result += food.name + ' '
+        return result.rstrip()
+
+    def __str__(self):
+        return "{}'s order on {}".format(self.customer, self.time)
+
 
 class Comment(models.Model):
     food = models.ForeignKey(Food)

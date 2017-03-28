@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>支付成功！</h2>
+  <h3>您现在可以：</h3>
+  <ul>
+    <a href="{% url 'market:home' %}">返回首页</a>
+  </ul>
+  <ul>
+    <a href="{% url 'market:my-orders' %}">查看我的订单</a>
+  </ul>
+{% endblock content %}

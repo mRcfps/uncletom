@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>商家待接单</h2>
+  {% for order in paid_orders %}
+    <h3>{{ order.seller }}的订单</h3>
+    <small>{{ order.time }}</small>
+      {% for food in order.food_list %}
+        <li>{{ food.name }}</li>
+      {% endfor %}
+  {% empty %}
+    <p>暂无</p>
+  {% endfor %}
+{% endblock content %}

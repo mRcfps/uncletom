@@ -2,7 +2,6 @@ from django.conf.urls import url
 
 from . import views
 
-
 urlpatterns = [
     # the index page, showing all the shops
     url(r'^$', views.HomeView.as_view(), name='home'),
@@ -22,5 +21,18 @@ urlpatterns = [
         r'^shop/(?P<shop_id>\d+)/food/(?P<pk>\d+)/$',
         views.FoodDetailView.as_view(),
         name='food-detail'
-    )
+    ),
+
+    # my orders page
+    url(
+        r'^my-orders/$',
+        views.MyOrdersView.as_view(),
+        name='my-orders',
+    ),
+
+    # checkout page(POST method only)
+    url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
+
+    # handle paying logic and redirects to pay_success page
+    url(r'^pay/$', views.PayView.as_view(), name='pay'),
 ]
