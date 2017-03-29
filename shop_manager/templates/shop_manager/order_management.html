@@ -29,4 +29,18 @@
   {% empty %}
     <p>暂无订单</p>
   {% endfor %}
+
+  <h2>已完成的订单</h2>
+  {% for order in finished_orders %}
+    <li>
+      <b>来自 {{ order.customer }} 的订单 ({{ order.time }})</b><br>
+      <small>
+        {% for food in order.food_list.all %}
+          {{ food.name }}  
+        {% endfor %}
+      </small>
+    </li>
+  {% empty %}
+    <p>暂无订单</p>
+  {% endfor %}
 {% endblock content %}

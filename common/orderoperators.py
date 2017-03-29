@@ -1,4 +1,4 @@
-from market.models import Order, Shop
+from market.models import Order, Shop, Food
 
 
 def create_order(request):

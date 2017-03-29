@@ -5,6 +5,7 @@ from django.shortcuts import render
 
 from market.models import Order
 from .forms import NewFoodForm
+from common import orderoperators
 
 
 class ShopManageView(TemplateView):
@@ -24,7 +25,7 @@ class NewFoodView(CreateView):
 
     def form_valid(self, form):
         new_food = form.save(commit=False)
-        new_food.seller = self.request.user.shop.get()
+        new_food.seller = self.request.user.shop
         new_food.save()
 
         return HttpResponseRedirect(reverse('shop_manager:shop-manage'))
@@ -36,28 +37,6 @@ class NewFoodView(CreateView):
         return ctx
 
 
-def fetch_orders(request):
-    '''Helps to fetch orders with different status of one shop'''
-    shop = request.user.shop
-
-    new_orders = Order.objects.filter(
-        food_list__seller__name=shop.name,
-        status='paid',
-    ).distinct().order_by('-time')
-
-    accepted_orders = Order.objects.filter(
-        food_list__seller__name=shop.name,
-        status='accepted',
-    ).distinct().order_by('-time')
-
-    finished_orders = Order.objects.filter(
-        food_list__seller__name=shop.name,
-        status='finished',
-    ).distinct().order_by('-time')
-
-    return new_orders, accepted_orders, finished_orders
-
-
 class OrderManagementView(TemplateView):
     template_name = 'shop_manager/order_management.html'
 
@@ -65,7 +44,7 @@ class OrderManagementView(TemplateView):
         ctx = super(OrderManagementView, self).get_context_data(**kwargs)
         ctx['shop'] = self.request.user.shop
         ctx['new_orders'], ctx['accepted_orders'], ctx['finished_orders'] \
-            = fetch_orders(self.request)
+            = orderoperators.fetch_orders_for_shop(self.request)
 
         return ctx
 
@@ -78,6 +57,6 @@ class AcceptOrderView(View):
 
         ctx = {'shop': request.user.shop}
         ctx['new_orders'], ctx['accepted_orders'], ctx['finished_orders'] \
-            = fetch_orders(self.request)
+            = orderoperators.fetch_orders_for_shop(self.request)
 
         return render(request, 'shop_manager/order_management.html', ctx)

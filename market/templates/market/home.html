@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+  {% if has_shop %}
+    <a href="{% url 'shop_manager:shop-manage' %}">我的店铺</a>
+  {% else %}
+    <a href="{% url 'market:new-shop' %}">我要开店</a>
+  {% endif %}
   {% for shop in shops %}
     <ul>
         <li>
