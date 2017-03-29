@@ -8,10 +8,8 @@
     {% for food in foods %}
     <li>
       <input type="checkbox" name="{{ food.name }}" value="{{ food.id }}">
-      <a href="{% url 'market:food-detail' shop.id food.id %}">
-          <img src="{{ food.photo.url }}" height="50" width="50" />
-          <p>{{ food.name }}</p>
-      </a>
+      <img src="{{ food.photo.url }}" height="50" width="50" />
+      <p>{{ food.name }}</p>
       <p>￥{{ food.price }}</p>
       <small>共销售{{ food.sale_num }}单</small>
     </li>
@@ -20,5 +18,15 @@
     {% endfor %}
     <input type="submit" value="下单">
   </form>
+
+  <h2>用户评论</h2>
+  {% for comment in comments %}
+    <li>
+      {{ comment.body }}<br>
+      <small>{{ comment.customer }} 于 {{ comment.add_time }} 评论</small>
+    </li>
+  {% empty %}
+    <p>暂无评论</p>
+  {% endfor %}
 
 {% endblock content %}

@@ -16,13 +16,6 @@ urlpatterns = [
         name='shop'
     ),
 
-    # a detailed page of the food
-    url(
-        r'^shop/(?P<shop_id>\d+)/food/(?P<pk>\d+)/$',
-        views.FoodDetailView.as_view(),
-        name='food-detail'
-    ),
-
     # my orders page
     url(
         r'^my-orders/$',
@@ -35,4 +28,18 @@ urlpatterns = [
 
     # handle paying logic and redirects to pay_success page
     url(r'^pay/$', views.PayView.as_view(), name='pay'),
+
+    # handle finishing order logic and redirects to comment page
+    url(
+        r'^finish-order/(?P<order_id>\d+)/$',
+        views.FinishOrderView.as_view(),
+        name='finish-order',
+    ),
+
+    # comment page, with support to both GET and POST
+    url(
+        r'^comment/(?P<order_id>\d+)/$',
+        views.CommentView.as_view(),
+        name='comment',
+    ),
 ]

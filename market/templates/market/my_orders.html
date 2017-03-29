@@ -1,13 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+
   <h2>商家待接单</h2>
   {% for order in paid_orders %}
-    <h3>{{ order.seller }}的订单</h3>
+    <h3>{{ order.get_seller }}的订单</h3>
     <small>{{ order.time }}</small>
-      {% for food in order.food_list %}
+      {% for food in order.food_list.all %}
         <li>{{ food.name }}</li>
       {% endfor %}
+  {% empty %}
+    <p>暂无</p>
+  {% endfor %}
+
+  <h2>正在配送</h2>
+  {% for order in accepted_orders %}
+    <h3>{{ order.get_seller }}的订单</h3>
+    <small>{{ order.time }}</small>
+      {% for food in order.food_list.all %}
+        <li>{{ food.name }}</li>
+      {% endfor %}
+    <a href="{% url 'market:finish-order' order.id %}">确认收货</a>
+  {% empty %}
+    <p>暂无</p>
+  {% endfor %}
+
+  <h2>已经完成的订单</h2>
+  {% for order in finished_orders %}
+    <h3>{{ order.get_seller }}的订单</h3>
+    <small>{{ order.time }}</small>
+      {% for food in order.food_list.all %}
+        <li>{{ food.name }}</li>
+      {% endfor %}
+    <a href="{% url 'market:comment' order.id %}">评价</a>
   {% empty %}
     <p>暂无</p>
   {% endfor %}

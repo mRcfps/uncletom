@@ -3,8 +3,9 @@ from django.views.generic import View, TemplateView, ListView, CreateView, Detai
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from .models import Shop, Food, Order
+from .models import Shop, Food, Order, Comment
 from .forms import NewShopForm
+from common import orderoperators
 
 
 class HomeView(ListView):
@@ -41,30 +42,15 @@ class ShopDetailView(ListView):
     template_name = 'market/shop.html'
     context_object_name = 'foods'
 
-    def get_shop(self):
-        return Shop.objects.get(pk=self.kwargs['shop_id'])
-
     def get_queryset(self):
-        return self.get_shop().food_set.all()
+        self.shop = Shop.objects.get(pk=self.kwargs['shop_id'])
+        return self.shop.food_set.all()
 
     def get_context_data(self, **kwargs):
         ctx = super(ShopDetailView, self).get_context_data(**kwargs)
-        ctx['shop'] = self.get_shop()
-
-        return ctx
-
-
-class FoodDetailView(DetailView):
-    template_name = 'market/food.html'
-    model = Food
-    context_object_name = 'food'
-
-    def get_context_data(self, **kwargs):
-        ctx = super(FoodDetailView, self).get_context_data(**kwargs)
-
-        food = ctx['food']
-        ctx['shop'] = food.seller
-        ctx['comments'] = food.comment_set.all()
+        ctx['shop'] = self.shop
+        ctx['comments'] = Comment.objects \
+            .filter(shop=self.shop).order_by('-add_time')
 
         return ctx
 
@@ -91,62 +77,48 @@ class PayView(View):
     http_method_names = ('post', )
 
     def post(self, request):
-        new_order = Order(customer=request.user, status='paid')
-        new_order.save()
-
-        shop = Shop()
-
-        for food_name, food_id in request.POST.items():
-            if food_name != 'csrfmiddlewaretoken':
-                food = Food.objects.get(pk=food_id)
-                shop = food.seller
-                new_order.food_list.add(food)
-                food.sale_num += 1
-                food.save()
-
-        shop.sale_num += 1
-        shop.save()
-
+        orderoperators.create_order(request)
         return render(request, 'market/pay_success.html')
 
 
 class MyOrdersView(TemplateView):
     template_name = 'market/my_orders.html'
 
-    def get_orders_with_sellers(self, orders):
-        '''Return a list of orders, each attached with its seller'''
-        order_list = []
-        for order in orders:
-            fake_order = {}
-            fake_order['seller'] = order.food_list.all()[0].seller
-            fake_order['food_list'] = list(order.food_list.all())
-            fake_order['time'] = order.time
-            order_list.append(fake_order)
-        return order_list
-
     def get_context_data(self, **kwargs):
         ctx = super(MyOrdersView, self).get_context_data(**kwargs)
 
-        # Get orders with status 'paid'
-        paid_orders = Order.objects.filter(
-            customer=self.request.user,
-            status='paid',
-        ).order_by('-time')
-
-        # Get orders with status 'accepted'
-        accepted_orders = Order.objects.filter(
-            customer=self.request.user,
-            status='accepted',
-        ).order_by('-time')
-
-        # Get orders with status 'finished'
-        finished_orders = Order.objects.filter(
-            customer=self.request.user,
-            status='finished',
-        ).order_by('-time')
-
-        ctx['paid_orders'] = self.get_orders_with_sellers(paid_orders)
-        ctx['accepted_orders'] = self.get_orders_with_sellers(accepted_orders)
-        ctx['finished_orders'] = self.get_orders_with_sellers(finished_orders)
+        ctx['paid_orders'], ctx['accepted_orders'], ctx['finished_orders'] = \
+            orderoperators.fetch_orders_for_customer(self.request)
 
         return ctx
+
+
+class FinishOrderView(View):
+    def get(self, request, order_id):
+        orderoperators.finish_order(request, order_id)
+        context = {'order': Order.objects.get(id=order_id)}
+
+        return render(request, 'market/comment.html', context)
+
+
+class CommentView(View):
+    def get(self, request, order_id):
+        context = {
+            'order': Order.objects.get(id=order_id),
+            'has_commented': True,
+        }
+        return render(request, 'market/comment.html', context)
+
+    def post(self, request, order_id):
+        new_comment = Comment()
+        new_comment.customer = request.user
+        new_comment.shop = Order.objects.get(id=order_id).get_seller()
+        new_comment.body = request.POST['body']
+        new_comment.save()
+
+        context = {
+            'order': Order.objects.get(id=order_id),
+            'has_commented': True,
+        }
+
+        return render(request, 'market/comment.html', context)

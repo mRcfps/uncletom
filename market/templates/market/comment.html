@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if has_commented %}
+    <h2>您已成功评价！</h2>
+  {% else %}
+    <h2>订单已完成！请评价一下吧~</h2>
+    <form action="{% url 'market:comment' order.id %}" method="POST">
+      {% csrf_token %}
+      <textarea name="body" rows="10" cols="48"></textarea>
+      <input type="submit"value="提交评价">
+    </form>
+  {% endif %}
+  
+  <h3>订单信息</h3>
+  <p>{{ order.get_seller }}</p>
+  <small>{{ order.time }}</small>
+  <ul>
+    {% for food in order.food_list.all %}
+        <li>{{ food.name }}</li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'market:home' %}">返回首页</a>
+{% endblock content %}

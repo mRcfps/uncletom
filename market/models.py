@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Shop(models.Model):
-    owner = models.OneToOneField(User)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=50)
     sale_num = models.IntegerField(default=0)
@@ -16,7 +16,7 @@ class Shop(models.Model):
 
 
 class Food(models.Model):
-    seller = models.ForeignKey(Shop)
+    seller = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=50)
     price = models.FloatField(default=0)
@@ -62,11 +62,11 @@ class Order(models.Model):
 
 
 class Comment(models.Model):
-    food = models.ForeignKey(Food)
-    customer = models.ForeignKey(User)
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     body = models.TextField()
     add_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return customer + "'s comment on " + food
+        return str(self.customer) + "'s comment on " + str(self.shop)
