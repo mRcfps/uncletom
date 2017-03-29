@@ -15,4 +15,11 @@ urlpatterns = [
         views.OrderManagementView.as_view(),
         name='order-management',
     ),
+
+    # a simple view to handle user's accepting orders logic
+    url(
+        r'^accept-order/(?P<order_id>\d+)/$',
+        views.AcceptOrderView.as_view(),
+        name='accept-order',
+    ),
 ]

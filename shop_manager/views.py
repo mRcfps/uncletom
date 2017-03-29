@@ -1,6 +1,7 @@
-from django.views.generic import CreateView, TemplateView
+from django.views.generic import View, CreateView, TemplateView
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.shortcuts import render
 
 from market.models import Order
 from .forms import NewFoodForm
@@ -28,29 +29,55 @@ class NewFoodView(CreateView):
 
         return HttpResponseRedirect(reverse('shop_manager:shop-manage'))
 
+    def get_context_data(self, **kwargs):
+        ctx = super(NewFoodView, self).get_context_data(**kwargs)
+        ctx['shop'] = self.request.user.shop
+
+        return ctx
+
+
+def fetch_orders(request):
+    '''Helps to fetch orders with different status of one shop'''
+    shop = request.user.shop
+
+    new_orders = Order.objects.filter(
+        food_list__seller__name=shop.name,
+        status='paid',
+    ).distinct().order_by('-time')
+
+    accepted_orders = Order.objects.filter(
+        food_list__seller__name=shop.name,
+        status='accepted',
+    ).distinct().order_by('-time')
+
+    finished_orders = Order.objects.filter(
+        food_list__seller__name=shop.name,
+        status='finished',
+    ).distinct().order_by('-time')
+
+    return new_orders, accepted_orders, finished_orders
+
 
 class OrderManagementView(TemplateView):
     template_name = 'shop_manager/order_management.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(OrderManagementView, self).get_context_data(**kwargs)
-
-        shop = self.request.user.shop
-
-        # Fetch orders sold by this shop
-        ctx['new_orders'] = Order.objects.filter(
-            food_list__seller__name=shop.name,
-            status='paid',
-        ).distinct().order_by('-time')
-
-        ctx['accepted_orders'] = Order.objects.filter(
-            food_list__seller__name=shop.name,
-            status='accepted',
-        ).distinct().order_by('-time')
-
-        ctx['finished_orders'] = Order.objects.filter(
-            food_list__seller__name=shop.name,
-            status='finished',
-        ).distinct().order_by('-time')
+        ctx['shop'] = self.request.user.shop
+        ctx['new_orders'], ctx['accepted_orders'], ctx['finished_orders'] \
+            = fetch_orders(self.request)
 
         return ctx
+
+
+class AcceptOrderView(View):
+    def get(self, request, order_id):
+        order = Order.objects.get(id=self.kwargs['order_id'])
+        order.status = 'accepted'
+        order.save()
+
+        ctx = {'shop': request.user.shop}
+        ctx['new_orders'], ctx['accepted_orders'], ctx['finished_orders'] \
+            = fetch_orders(self.request)
+
+        return render(request, 'shop_manager/order_management.html', ctx)

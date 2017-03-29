@@ -1,4 +1,6 @@
-<h1>{{ shop.name }} 后台管理</h1>
+<h1>
+    <a href="{% url 'shop_manager:shop-manage' %}">{{ shop.name }} 后台管理</a>
+</h1>
 
 {% block content %}
   
