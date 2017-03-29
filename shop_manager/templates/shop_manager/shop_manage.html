@@ -1,7 +1,9 @@
-{% extends "base.html" %}
+{% extends "shop_manager_base.html" %}
 
 {% block content %}
-  <a href="{% url 'shop_manager:new-food' %}">添加菜品</a>
+
+  <a href="{% url 'shop_manager:new-food' %}">添加菜品</a> - 
+  <a href="{% url 'shop_manager:order-management' %}">订单管理</a>
 
   <p>当前菜品</p>
   {% for food in foods %}

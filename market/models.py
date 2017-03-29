@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class Shop(models.Model):
-    owner = models.ForeignKey(User, related_name='shop')
+    owner = models.OneToOneField(User)
 
     name = models.CharField(max_length=50)
     sale_num = models.IntegerField(default=0)
@@ -51,6 +51,11 @@ class Order(models.Model):
         for food in self.food_list.all():
             result += food.name + ' '
         return result.rstrip()
+
+    def get_seller(self):
+        '''A shortcut method to know this order's seller
+        without bringing redundancy to the database schema'''
+        return self.food_list.all()[0].seller
 
     def __str__(self):
         return "{}'s order on {}".format(self.customer, self.time)

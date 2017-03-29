@@ -17,7 +17,7 @@ class HomeView(ListView):
         user = self.request.user
 
         # check out whether the user has logged in and has a shop
-        if user.is_authenticated and user.shop.all():
+        if user.is_authenticated and user.shop:
             ctx['has_shop'] = True
         else:
             ctx['has_shop'] = False

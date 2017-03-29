@@ -1,0 +1,17 @@
+{% extends "shop_manager_base.html" %}
+
+{% block content %}
+  <h2>当前新订单</h2>
+  {% for order in new_orders %}
+    <li>
+      <b>来自 {{ order.customer }} 的订单 ({{ order.time }})</b><br>
+      <small>
+        {% for food in order.food_list.all %}
+          {{ food.name }}  
+        {% endfor %}
+      </small>
+    </li>
+  {% empty %}
+    <p>暂无新订单</p>
+  {% endfor %}
+{% endblock content %}
