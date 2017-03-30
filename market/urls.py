@@ -13,7 +13,7 @@ urlpatterns = [
     url(
         r'^shop/(?P<shop_id>\d+)/$',
         views.ShopDetailView.as_view(),
-        name='shop'
+        name='shop-detail',
     ),
 
     # my orders page

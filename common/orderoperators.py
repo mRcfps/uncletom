@@ -73,5 +73,3 @@ def fetch_orders_for_shop(request):
     ).distinct().order_by('-time')
 
     return new_orders, accepted_orders, finished_orders
-
-

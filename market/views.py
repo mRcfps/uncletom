@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import View, TemplateView, ListView, CreateView, DetailView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 from .models import Shop, Food, Order, Comment
 from .forms import NewShopForm
@@ -30,6 +32,10 @@ class NewShopView(CreateView):
     template_name = 'market/new_shop.html'
     form_class = NewShopForm
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(NewShopView, self).dispatch(*args, **kwargs)
+
     def form_valid(self, form):
         new_shop = form.save(commit=False)
         new_shop.owner = self.request.user
@@ -41,6 +47,10 @@ class NewShopView(CreateView):
 class ShopDetailView(ListView):
     template_name = 'market/shop.html'
     context_object_name = 'foods'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(ShopDetailView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
         self.shop = Shop.objects.get(pk=self.kwargs['shop_id'])
@@ -56,7 +66,12 @@ class ShopDetailView(ListView):
 
 
 class CheckoutView(View):
+    # Only POST method will be handled in Checkout View
     http_method_names = ('post', )
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(CheckoutView, self).dispatch(*args, **kwargs)
 
     def post(self, request):
         # get the food list from the posted food_id
@@ -74,7 +89,12 @@ class CheckoutView(View):
 
 
 class PayView(View):
+    # Only POST method will be handled in Pay View
     http_method_names = ('post', )
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(PayView, self).dispatch(*args, **kwargs)
 
     def post(self, request):
         orderoperators.create_order(request)
@@ -83,6 +103,10 @@ class PayView(View):
 
 class MyOrdersView(TemplateView):
     template_name = 'market/my_orders.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(MyOrdersView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         ctx = super(MyOrdersView, self).get_context_data(**kwargs)
@@ -94,6 +118,16 @@ class MyOrdersView(TemplateView):
 
 
 class FinishOrderView(View):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        order = Order.objects.get(id=self.kwargs['order_id'])
+        if order.customer != self.request.user:
+            # This order does not belong to the current user in which
+            # case we will block his/her request
+            raise Http404
+        else:
+            return super(FinishOrderView, self).dispatch(*args, **kwargs)
+
     def get(self, request, order_id):
         orderoperators.finish_order(request, order_id)
         context = {'order': Order.objects.get(id=order_id)}
@@ -102,6 +136,16 @@ class FinishOrderView(View):
 
 
 class CommentView(View):
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        order = Order.objects.get(id=self.kwargs['order_id'])
+        if order.customer != self.request.user:
+            # This order does not belong to the current user in which
+            # case we will block his/her request
+            raise Http404
+        else:
+            return super(CommentView, self).dispatch(*args, **kwargs)
+
     def get(self, request, order_id):
         context = {
             'order': Order.objects.get(id=order_id),

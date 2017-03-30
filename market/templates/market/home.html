@@ -10,7 +10,7 @@
     <ul>
         <li>
             <img src="{{ shop.logo.url }}" height="100" width="100">
-            <a href="{% url 'market:shop' shop.id %}">{{ shop.name }}</a><br>
+            <a href="{% url 'market:shop-detail' shop.id %}">{{ shop.name }}</a><br>
             <small>销量 {{ shop.sale_num }} 单</small>
             <small>评分 {{ shop.rating }} </small>
         </li>
