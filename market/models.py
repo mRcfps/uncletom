@@ -6,10 +6,14 @@ from django.contrib.auth.models import User
 class Shop(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=50)
-    sale_num = models.IntegerField(default=0)
-    rating = models.FloatField(default=5.0)
-    logo = models.ImageField(upload_to='img')
+    name = models.CharField(max_length=50, verbose_name='名称')
+    sale_num = models.IntegerField(default=0, verbose_name='销量')
+    rating = models.FloatField(default=5.0, verbose_name='评分')
+    logo = models.ImageField(upload_to='img', verbose_name='商标')
+
+    class Meta:
+        verbose_name = '商家'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.name
@@ -18,10 +22,14 @@ class Shop(models.Model):
 class Food(models.Model):
     seller = models.ForeignKey(Shop, on_delete=models.CASCADE)
 
-    name = models.CharField(max_length=50)
-    price = models.FloatField(default=0)
-    sale_num = models.IntegerField(default=0)
-    photo = models.ImageField(upload_to='img')
+    name = models.CharField(max_length=50, verbose_name='名称')
+    price = models.FloatField(default=0, verbose_name='售价')
+    sale_num = models.IntegerField(default=0, verbose_name='销量')
+    photo = models.ImageField(upload_to='img', verbose_name='照片')
+
+    class Meta:
+        verbose_name = '美食'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return self.name
@@ -43,6 +51,10 @@ class Order(models.Model):
         default='paid',
     )
     time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = '订单'
+        verbose_name_plural = verbose_name
 
     def show_food_list(self):
         '''A method to fetch the food list and return a string,
@@ -67,6 +79,10 @@ class Comment(models.Model):
 
     body = models.TextField()
     add_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = '评论'
+        verbose_name_plural = verbose_name
 
     def __str__(self):
         return str(self.customer) + "'s comment on " + str(self.shop)

@@ -6,8 +6,22 @@ urlpatterns = [
     # the index page, showing all the shops
     url(r'^$', views.ShopManageView.as_view(), name='shop-manage'),
 
-    # the page for opening a new shop
+    # the page for adding new food
     url(r'^new-food/$', views.NewFoodView.as_view(), name='new-food'),
+
+    # the page for update food information
+    url(
+        r'^update-food/(?P<pk>\d+)/$',
+        views.UpdateFoodView.as_view(),
+        name='update-food',
+    ),
+
+    # handle deleting food
+    url(
+        r'^delete-food/(?P<pk>\d+)/$',
+        views.DeleteFoodView.as_view(),
+        name='delete-food',
+    ),
 
     # the page for displaying and managing orders
     url(

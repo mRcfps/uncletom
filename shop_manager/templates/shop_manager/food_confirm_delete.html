@@ -1,0 +1,8 @@
+{% extends "base_shop_manager.html" %}
+
+{% block content %}
+  <form action="" method="post">{% csrf_token %}
+    <p>确实要删除{{ object }}吗？</p>
+    <input type="submit" value="确认" />
+  </form>
+{% endblock content %}

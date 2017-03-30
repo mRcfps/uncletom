@@ -2,10 +2,6 @@
 
 {% block content %}
   <h2>登录您的帐号</h2>
-
-  {% if form.errors %}
-    <p>用户名和密码不匹配！</p>
-  {% endif %}
   
   <form action="{% url 'users:login' %}" method="POST">
       {% csrf_token %}

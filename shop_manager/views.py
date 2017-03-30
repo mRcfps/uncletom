@@ -1,11 +1,11 @@
-from django.views.generic import View, CreateView, TemplateView
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
-from django.shortcuts import render
+from django.views.generic import \
+    View, CreateView, UpdateView, DeleteView, TemplateView
+from django.http import HttpResponseRedirect, Http404
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-from market.models import Order
+from market.models import Food, Order
 from .forms import NewFoodForm
 from common import orderoperators
 
@@ -27,7 +27,8 @@ class ShopManageView(TemplateView):
 
 class NewFoodView(CreateView):
     template_name = 'shop_manager/new_food.html'
-    form_class = NewFoodForm
+    model = Food
+    fields = ['name', 'price', 'photo']
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -45,6 +46,29 @@ class NewFoodView(CreateView):
         ctx['shop'] = self.request.user.shop
 
         return ctx
+
+
+class UpdateFoodView(UpdateView):
+    template_name = 'shop_manager/update_food.html'
+    model = Food
+    fields = ['name', 'price', 'photo']
+    success_url = reverse_lazy('shop_manager:shop-manage')
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        food = Food.objects.get(id=self.kwargs['pk'])
+        if food.seller != self.request.user.shop:
+            # The food does not belong to the current user's shop in which
+            # case we will block his/her request
+            raise Http404
+        else:
+            return super(UpdateFoodView, self).dispatch(*args, **kwargs)
+
+
+class DeleteFoodView(DeleteView):
+    template_name = 'shop_manager/food_confirm_delete.html'
+    model = Food
+    success_url = reverse_lazy('shop_manager:shop-manage')
 
 
 class OrderManagementView(TemplateView):
@@ -67,8 +91,8 @@ class AcceptOrderView(View):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         order = Order.objects.get(id=self.kwargs['order_id'])
-        if order.get_seller() != self.request.user:
-            # This order does not belong to the current user in which
+        if order.get_seller() != self.request.user.shop:
+            # This order does not belong to the current shop in which
             # case we will block his/her request
             raise Http404
         else:

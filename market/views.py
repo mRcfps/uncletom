@@ -13,7 +13,6 @@ from common import orderoperators
 
 class HomeView(ListView):
     template_name = 'market/home.html'
-    model = Shop
     context_object_name = 'shops'
 
     def get_context_data(self, **kwargs):
@@ -21,17 +20,25 @@ class HomeView(ListView):
         user = self.request.user
 
         # check out whether the user has logged in and has a shop
-        if user.is_authenticated and user.shop:
-            ctx['has_shop'] = True
-        else:
+        try:
+            if user.is_authenticated and user.shop:
+                ctx['has_shop'] = True
+            else:
+                ctx['has_shop'] = False
+        except:
+            # Handle RelatedObjectDoesNotExist error
             ctx['has_shop'] = False
 
         return ctx
 
+    def get_queryset(self):
+        return Shop.objects.exclude(owner=self.request.user)
+
 
 class NewShopView(CreateView):
     template_name = 'market/new_shop.html'
-    form_class = NewShopForm
+    model = Shop
+    fields = ['name', 'logo']
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
@@ -42,7 +49,7 @@ class NewShopView(CreateView):
         new_shop.owner = self.request.user
         new_shop.save()
 
-        return HttpResponseRedirect(reverse('market:home'))
+        return HttpResponseRedirect(reverse('shop_manager:shop-manage'))
 
 
 class ShopDetailView(ListView):

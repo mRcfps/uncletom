@@ -4,11 +4,12 @@
   <p>当前菜品</p>
   {% for food in foods %}
     <li>
-        <img src="{{ food.photo.url }}" height="50" width="50" />
-        <p>{{ food.name }}</p>
-        <p>￥{{ food.price }}</p>
-        <small>共销售{{ food.sale_num }}单</small>
-        <small><a href="">编辑菜品</a></small>
+      <img src="{{ food.photo.url }}" height="50" width="50" />
+      <p>{{ food.name }}</p>
+      <p>￥{{ food.price }}</p>
+      <small>共销售{{ food.sale_num }}单</small>
+      <small><a href="{% url 'shop_manager:update-food' food.id %}">编辑菜品</a></small>
+      <small><a href="{% url 'shop_manager:delete-food' food.id %}">删除菜品</a></small>
     </li>
   {% empty %}
     <p>您尚未添加任何待销售的菜品</p>
