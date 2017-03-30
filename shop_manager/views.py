@@ -51,12 +51,6 @@ class OrderManagementView(TemplateView):
 
 class AcceptOrderView(View):
     def get(self, request, order_id):
-        order = Order.objects.get(id=self.kwargs['order_id'])
-        order.status = 'accepted'
-        order.save()
+        orderoperators.accept_order(request, order_id)
 
-        ctx = {'shop': request.user.shop}
-        ctx['new_orders'], ctx['accepted_orders'], ctx['finished_orders'] \
-            = orderoperators.fetch_orders_for_shop(self.request)
-
-        return render(request, 'shop_manager/order_management.html', ctx)
+        return HttpResponseRedirect(reverse('shop_manager:order-management'))
