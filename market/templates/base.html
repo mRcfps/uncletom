@@ -1,14 +1,15 @@
 <h1><a href="{% url 'market:home' %}">汤姆叔叔的能量站</a></h1>
 
 <p>
-    {% if user.is_authenticated %}
-      欢迎，{{ user.username }} - 
-      <a href="{% url 'users:logout' %}">注销</a> - 
-      <a href="{% url 'market:my-orders' %}">我的订单</a>
-    {% else %}
-      <a href="{% url 'users:login' %}">登录</a>
-      <a href="{% url 'users:register' %}">注册</a>
-    {% endif %}
+  {% if user.is_authenticated %}
+    欢迎，{{ user.username }} - 
+    <a href="{% url 'users:logout' %}">注销</a>
+  {% else %}
+    <a href="{% url 'users:login' %}">登录</a>
+    <a href="{% url 'users:register' %}">注册</a>
+  {% endif %}
 </p>
+
+{% block navbar %} {% endblock navbar %}
 
 {% block content %} {% endblock content %}

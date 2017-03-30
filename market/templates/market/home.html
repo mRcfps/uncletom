@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base_market.html" %}
 
 {% block content %}
   {% if has_shop %}
@@ -6,16 +6,18 @@
   {% else %}
     <a href="{% url 'market:new-shop' %}">我要开店</a>
   {% endif %}
+
   {% for shop in shops %}
     <ul>
-        <li>
-            <img src="{{ shop.logo.url }}" height="100" width="100">
-            <a href="{% url 'market:shop-detail' shop.id %}">{{ shop.name }}</a><br>
-            <small>销量 {{ shop.sale_num }} 单</small>
-            <small>评分 {{ shop.rating }} </small>
-        </li>
+      <li>
+        <img src="{{ shop.logo.url }}" height="100" width="100">
+        <a href="{% url 'market:shop-detail' shop.id %}">{{ shop.name }}</a><br>
+        <small>销量 {{ shop.sale_num }} 单</small>
+        <small>评分 {{ shop.rating }} </small>
+      </li>
     </ul>
   {% empty %}
     <p>您附近没有商家。</p>
   {% endfor %}
+
 {% endblock content %}

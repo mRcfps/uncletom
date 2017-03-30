@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.views.generic import View, TemplateView, ListView, CreateView, DetailView
+from django.views.generic import \
+    View, TemplateView, ListView, CreateView, DetailView
 from django.http import HttpResponseRedirect, Http404
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator

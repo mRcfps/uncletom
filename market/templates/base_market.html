@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+  {% if user.is_authenticated %}
+    <p>
+      <a href="{% url 'market:my-orders' %}">我的订单</a>
+    </p>
+  {% endif %}
+{% endblock navbar %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<p>
+  <a href="{% url 'shop_manager:shop-manage' %}">{{ shop.name }} 后台管理</a> - 
+  <a href="{% url 'shop_manager:new-food' %}">添加菜品</a> - 
+  <a href="{% url 'shop_manager:order-management' %}">订单管理</a>
+</p>
+    
+{% endblock navbar %}

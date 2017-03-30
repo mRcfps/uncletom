@@ -1,7 +1,6 @@
-{% extends "shop_manager_base.html" %}
+{% extends "base_shop_manager.html" %}
 
 {% block content %}
-    <h2>添加菜品</h2>
   <form enctype="multipart/form-data" action="{% url 'shop_manager:new-food' %}" method="post">
       {% csrf_token %}
       {{ form.as_p }}
