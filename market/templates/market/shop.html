@@ -1,32 +1,44 @@
 {% extends "base_market.html" %}
 
 {% block content %}
-  <h2>欢迎来到{{ shop.name }}!</h2>
+  <div class="page-header text-center">
+    <h2>欢迎来到{{ shop.name }}!</h2>
+  </div>
 
   <form action="{% url 'market:checkout' %}" method="post">
     {% csrf_token %}
-    {% for food in foods %}
-    <li>
-      <input type="checkbox" name="{{ food.name }}" value="{{ food.id }}">
-      <img src="{{ food.photo.url }}" height="50" width="50" />
-      <p>{{ food.name }}</p>
-      <p>￥{{ food.price }}</p>
-      <small>共销售{{ food.sale_num }}单</small>
-    </li>
-    {% empty %}
-      <p>这家店什么吃的都没！</p>
-    {% endfor %}
-    <input type="submit" value="下单">
+    <div class="row">
+      {% for food in foods %}
+        <div class="col-md-6 panel panel-default">
+          <div class="row">
+            <div class="col-md-3">
+              <img src="{{ food.photo.url }}" height="100" width="100" />
+            </div>
+            <div class="col-md-9">
+              <h4><input type="checkbox" name="{{ food.name }}" value="{{ food.id }}"> {{ food.name }}</h4>
+              <p>￥{{ food.price }}</p>
+              <small>共销售{{ food.sale_num }}单</small>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <p>这家店什么吃的都没！</p>
+      {% endfor %}
+    </div>
+    <button type="submit" class="btn btn-primary text-center">下单</button>
   </form>
 
-  <h2>用户评论</h2>
-  {% for comment in comments %}
-    <li>
-      {{ comment.body }}<br>
-      <small>{{ comment.customer }} 于 {{ comment.add_time }} 评论</small>
-    </li>
-  {% empty %}
-    <p>暂无评论</p>
-  {% endfor %}
+  <h2 class="text-center">用户评论</h2><hr>
+  <div>
+    {% for comment in comments %}
+      <div>
+        <h4>{{ comment.customer }} <small>{{ comment.add_time }}</small></h4>
+        <p>{{ comment.body }}</p>
+      </div>
+    {% empty %}
+      <p>暂无评论</p>
+    {% endfor %}
+  </div>
+  
 
 {% endblock content %}

@@ -32,7 +32,12 @@ class HomeView(ListView):
         return ctx
 
     def get_queryset(self):
-        return Shop.objects.exclude(owner=self.request.user)
+        if self.request.user.is_authenticated:
+            # if the user has logged in, we'll prevent him or her from
+            # entering his/her own shop
+            return Shop.objects.exclude(owner=self.request.user)
+        else:
+            return Shop.objects.all()
 
 
 class NewShopView(CreateView):

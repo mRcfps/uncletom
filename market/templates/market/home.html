@@ -1,23 +1,42 @@
-{% extends "base_market.html" %}
+{% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block content %}
-  {% if has_shop %}
-    <a href="{% url 'shop_manager:shop-manage' %}">我的店铺</a>
-  {% else %}
-    <a href="{% url 'market:new-shop' %}">我要开店</a>
-  {% endif %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1>欢迎来到汤姆叔叔的能量站</h1>
+      <p>在这里，享受一场属于美食的盛宴。</p>
+      {% if has_shop %}
+      <a href="{% url 'shop_manager:shop-manage' %}">我的店铺</a>
+      {% else %}
+        <a href="{% url 'market:new-shop' %}">我要开店</a>
+      {% endif %}
+    </div>
+    
+    <div class="row">
+      {% for shop in shops %}
+        <div class="col-md-6 panel panel-default shop-panel">
+          <a href="{% url 'market:shop-detail' shop.id %}">
+            <div class="row">
+              <div class="col-md-3 text-center">
+                <img src="{{ shop.logo.url }}" height="150" width="150">
+              </div>
+              <div class="col-md-9">
+                <h3>{{ shop.name }}</h3><hr>
+                <p>销量 {{ shop.sale_num }} 单</p>
+                <p>评分 {{ shop.rating }} </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      {% empty %}
+        <p>您附近没有商家。</p>
+      {% endfor %}
+    </div>
+    
 
-  {% for shop in shops %}
-    <ul>
-      <li>
-        <img src="{{ shop.logo.url }}" height="100" width="100">
-        <a href="{% url 'market:shop-detail' shop.id %}">{{ shop.name }}</a><br>
-        <small>销量 {{ shop.sale_num }} 单</small>
-        <small>评分 {{ shop.rating }} </small>
-      </li>
-    </ul>
-  {% empty %}
-    <p>您附近没有商家。</p>
-  {% endfor %}
+
+  </div>
+  
 
 {% endblock content %}

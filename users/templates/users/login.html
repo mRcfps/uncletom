@@ -1,13 +1,21 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block content %}
-  <h2>登录您的帐号</h2>
-  
-  <form action="{% url 'users:login' %}" method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
-      
-      <input type="submit" name="" value="登录">
-      <input type="hidden" name="next" value="{{ next }}">
+  <div class="page-header text-center">
+    <h2>登录您的帐号</h2>
+  </div>
+
+  <form class="form-horizontal" role="form" action="{% url 'users:login' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <div class="form-group">
+      <div class="text-center">
+        <button class="btn btn-primary" type="submit">确认</button>
+      </div>
+    </div>
+
+    <input type="hidden" name="next" value="{{ next }}">
   </form>
 {% endblock content %}

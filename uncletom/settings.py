@@ -37,9 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Apps of Uncletom
     'users',
     'market',
     'shop_manager',
+
+    # 3rd-party app
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [
