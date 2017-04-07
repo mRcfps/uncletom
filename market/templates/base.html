@@ -12,21 +12,34 @@
 
   {% bootstrap_css %}
   {% bootstrap_javascript %}
-  <link rel="stylesheet" type="text/css" href="{% static "base.css" %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+  {% block stylesheet %}
+  {% endblock stylesheet %}
+
+  <script>
+    function mOver(obj) {
+        obj.src = "{% static 'img/logo-hover.png' %}";
+    }
+
+    function mOut(obj) {
+        obj.src = "{% static 'img/logo.png' %}";
+    }
+  </script>
 </head>
 <body>
 
-  <!-- Static navbar -->
-  <nav class="navbar navbar-inverse navbar-static-top">
+  <nav class="navbar navbar-inverse navbar-static-top" style="margin-bottom: 0;">
     <div class="container">
-      
+    
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed"
             data-toggle="collapse" data-target="#navbar"
             aria-expanded="false" aria-controls="navbar">
         </button>
         <a href="{% url 'market:home' %}" class="navbar-brand">
-          汤姆叔叔的能量站
+            <img src="{% static 'img/logo.png' %}" alt="logo" height="24px" width="24px"
+                onmouseover="mOver(this)" onmouseout="mOut(this)">
         </a>
       </div>
 
@@ -35,6 +48,10 @@
           <li><a href="{% url 'market:my-orders' %}">我的订单</a></li>
         </ul>
 
+        <ul class="nav navbar-nav">
+          <li>{% block shop_manage %}{% endblock shop_manage %}</li>
+        </ul>
+      
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_authenticated %}
             <li><a>欢迎, {{ user.username }}.</a></li>
@@ -44,14 +61,11 @@
             <li><a href="{% url 'users:login' %}">登录</a></li>
           {% endif %}
         </ul>
-      </div><!--/.nav-collapse -->
-
+      </div>
     </div>
   </nav>
 
-  <div class="container">
-    {% block content %} {% endblock content %}
-  </div>
+  {% block content %} {% endblock content %}
 
   <footer class="container-fluid text-center">
     <h3>Powered by <a id="powerformer" href="http://powerformer.com">Powerformer Inc.</a></h3>

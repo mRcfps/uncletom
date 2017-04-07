@@ -1,0 +1,17 @@
+.food-panel {
+    margin: 20px 240px;
+}
+
+.confirm-form {
+    margin: 50px;
+    padding: 50px;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}

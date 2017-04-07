@@ -12,7 +12,7 @@ class FoodAdmin(admin.ModelAdmin):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('id', 'customer', 'time', 'show_food_list', 'status')
+    list_display = ('id', 'customer', 'time', 'show_food_list', 'status', 'has_commented')
     list_filter = ('customer', )
 
 

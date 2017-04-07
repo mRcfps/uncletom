@@ -1,17 +1,34 @@
 {% extends "base_shop_manager.html" %}
+{% load static %}
 
-{% block content %}
-  <p>当前菜品</p>
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'shop_manager/css/shop_manage.css' %}">
+{% endblock stylesheet %}
+
+{% block tabs %}
+  <li class="active"><a href="">菜品管理</a></li>
+  <li><a href="{% url 'shop_manager:order-management' %}">订单管理</a></li>
+{% endblock tabs %}
+
+{% block managecontent %}
+  <div class="text-center add-food">
+    <a class="btn-lg btn-default btn-add-food" href="{% url 'shop_manager:new-food' %}">
+      <span class="glyphicon glyphicon-plus"></span> 添加菜品
+    </a>
+  </div>
   {% for food in foods %}
-    <li>
-      <img src="{{ food.photo.url }}" height="50" width="50" />
-      <p>{{ food.name }}</p>
-      <p>￥{{ food.price }}</p>
-      <small>共销售{{ food.sale_num }}单</small>
-      <small><a href="{% url 'shop_manager:update-food' food.id %}">编辑菜品</a></small>
-      <small><a href="{% url 'shop_manager:delete-food' food.id %}">删除菜品</a></small>
-    </li>
+    <div class="row panel" style="padding: 10px 0;">
+      <div class="col-md-3">
+        <img class="img-rounded" src="{{ food.photo.url }}" height="150" width="150" />
+      </div>
+      <div class="col-md-9">
+        <h3>{{ food.name }}</h3><hr>
+        <h4>￥{{ food.price }} <small>共销售{{ food.sale_num }}单</small></h4>
+        <a class="btn btn-primary" href="{% url 'shop_manager:update-food' food.id %}">编辑菜品</a>
+        <a class="btn btn-danger" href="{% url 'shop_manager:delete-food' food.id %}">删除菜品</a>
+      </div>
+    </div>
   {% empty %}
     <p>您尚未添加任何待销售的菜品</p>
   {% endfor %}
-{% endblock content %}
+{% endblock managecontent %}

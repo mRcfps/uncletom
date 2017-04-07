@@ -7,29 +7,34 @@
 
   <form action="{% url 'market:checkout' %}" method="post">
     {% csrf_token %}
-    <div class="row">
-      {% for food in foods %}
-        <div class="col-md-6 panel panel-default">
-          <div class="row">
-            <div class="col-md-3">
-              <img src="{{ food.photo.url }}" height="100" width="100" />
-            </div>
-            <div class="col-md-9">
-              <h4><input type="checkbox" name="{{ food.name }}" value="{{ food.id }}"> {{ food.name }}</h4>
-              <p>￥{{ food.price }}</p>
-              <small>共销售{{ food.sale_num }}单</small>
+    <div class="container">
+      <div class="row justify-content-md-center">
+        {% for food in foods %}
+          <div class="col-md-6 panel panel-default">
+            <div class="row">
+              <div class="col-md-3">
+                <img src="{{ food.photo.url }}" height="100" width="100" />
+              </div>
+              <div class="col-md-9">
+                <h4><input type="checkbox" name="{{ food.name }}" value="{{ food.id }}"> {{ food.name }}</h4>
+                <p>￥{{ food.price }}</p>
+                <small>共销售{{ food.sale_num }}单</small>
+              </div>
             </div>
           </div>
-        </div>
-      {% empty %}
-        <p>这家店什么吃的都没！</p>
-      {% endfor %}
+        {% empty %}
+          <p>这家店什么吃的都没！</p>
+        {% endfor %}
     </div>
-    <button type="submit" class="btn btn-primary text-center">下单</button>
+    </div>
+    
+    <div class="text-center">
+      <button type="submit" class="btn-lg btn-primary text-center">下单</button>
+    </div>
   </form>
 
-  <h2 class="text-center">用户评论</h2><hr>
-  <div>
+  <h2 class="text-center" style="margin-top: 50px;">用户评论</h2><hr>
+  <div style="margin: 50px;">
     {% for comment in comments %}
       <div>
         <h4>{{ comment.customer }} <small>{{ comment.add_time }}</small></h4>
@@ -39,6 +44,4 @@
       <p>暂无评论</p>
     {% endfor %}
   </div>
-  
-
 {% endblock content %}

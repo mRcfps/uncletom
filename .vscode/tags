@@ -47,11 +47,11 @@ HttpResponseRedirect	../shop_manager/views.py	/^from django.http import HttpResp
 HttpResponseRedirect	../users/views.py	/^from django.http import HttpResponseRedirect$/;"	kind:namespace	line:4
 INSTALLED_APPS	../uncletom/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
 LANGUAGE_CODE	../uncletom/settings.py	/^LANGUAGE_CODE = 'zh-hans'$/;"	kind:variable	line:114
-LOGIN_REDIRECT_URL	../uncletom/settings.py	/^LOGIN_REDIRECT_URL = '\/'$/;"	kind:variable	line:132
-LOGIN_URL	../uncletom/settings.py	/^LOGIN_URL = '\/users\/login\/'$/;"	kind:variable	line:130
+LOGIN_REDIRECT_URL	../uncletom/settings.py	/^LOGIN_REDIRECT_URL = '\/'$/;"	kind:variable	line:136
+LOGIN_URL	../uncletom/settings.py	/^LOGIN_URL = '\/users\/login\/'$/;"	kind:variable	line:134
 ListView	../market/views.py	/^    View, TemplateView, ListView, CreateView, DetailView$/;"	kind:namespace	line:3
-MEDIA_ROOT	../uncletom/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	kind:variable	line:134
-MEDIA_URL	../uncletom/settings.py	/^MEDIA_URL = '\/media\/'$/;"	kind:variable	line:136
+MEDIA_ROOT	../uncletom/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	kind:variable	line:138
+MEDIA_URL	../uncletom/settings.py	/^MEDIA_URL = '\/media\/'$/;"	kind:variable	line:140
 MIDDLEWARE	../uncletom/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:50
 MarketConfig	../market/apps.py	/^class MarketConfig(AppConfig):$/;"	kind:class	line:4
 Meta	../market/forms.py	/^    class Meta:$/;"	kind:class	line:7
@@ -84,6 +84,7 @@ OrderManagementView	../shop_manager/views.py	/^class OrderManagementView(Templat
 PayView	../market/views.py	/^class PayView(View):$/;"	kind:class	line:104
 ROOT_URLCONF	../uncletom/settings.py	/^ROOT_URLCONF = 'uncletom.urls'$/;"	kind:variable	line:60
 RegisterView	../users/views.py	/^class RegisterView(CreateView):$/;"	kind:class	line:8
+STATICFILES_DIRS	../uncletom/settings.py	/^STATICFILES_DIRS = ($/;"	kind:variable	line:130
 STATIC_URL	../uncletom/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:128
 STATUS_CHOICE	../market/models.py	/^    STATUS_CHOICE = ($/;"	kind:variable	line:42
 Shop	../common/orderoperators.py	/^from market.models import Order, Shop, Food$/;"	kind:namespace	line:1

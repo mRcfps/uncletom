@@ -1,8 +1,35 @@
 {% extends "base_shop_manager.html" %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'shop_manager/css/food_confirm_delete.css' %}">
+{% endblock stylesheet %}
 
 {% block content %}
-  <form action="" method="post">{% csrf_token %}
-    <p>确实要删除{{ object }}吗？</p>
-    <input type="submit" value="确认" />
+  <div class="page-header text-center">
+    <h2>删除菜品确认</h2> 
+  </div>
+
+  <div class="container text-center">
+    <div class="row panel panel-default food-panel">
+      <div class="col-sm-3">
+        <img src="{{ object.photo.url }}" class="img-circle" alt="photo" width="120" height="120">
+      </div>
+      <div class="col-sm-9">
+        <h3>{{ object.name }}</h3>
+        <h5>￥{{ object.price }}</h5>
+        <p>共销售 {{ object.sale_num }} 单</p>
+      </div>
+    </div>
+  </div>
+
+  <form class="confirm-form text-center" action="" method="post">{% csrf_token %}
+    <h3>确实要删除{{ object }}吗？</h3><hr>
+    <button type="submit" class="btn-lg btn-primary">
+      确认
+    </button>
+    <button class="btn-lg btn-danger">
+      <a href="{% url 'shop_manager:shop-manage' %}">取消</a>
+    </button>
   </form>
 {% endblock content %}

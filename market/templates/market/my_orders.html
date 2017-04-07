@@ -1,65 +1,76 @@
 {% extends "base_market.html" %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/order.css' %}">
+{% endblock stylesheet %}
 
 {% block content %}
   <div class="page-header text-center">
     <h2>我的订单</h2>
   </div>
 
-  <div class="row">
-    <div class="col-sm-4 order-list">
-      <div class="panel panel-default text-center">
-        <div class="panel-heading">
-          <h1>商家待接单</h1>
-        </div>
-        <div class="panel-body">
-          {% for order in paid_orders %}
-            <h3>{{ order.get_seller }}的订单</h3>
-            <small>{{ order.time }}</small>
-            {% for food in order.food_list.all %}
-              <li>{{ food.name }}</li>
-            {% endfor %}
-          {% empty %}
-            <p>暂无</p>
-          {% endfor %}
-        </div>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <h3>商家待接单</h3>
       </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel panel-default text-center">
-        <div class="panel-heading">
-          <h1>正在配送</h1>
-        </div>
-        <div class="panel-body">
-          {% for order in accepted_orders %}
-          <h3>{{ order.get_seller }}的订单</h3>
-          <small>{{ order.time }}</small>
+      <div class="panel-body">
+        {% for order in paid_orders %}
+          <h4 class="order-title">
+            <span class="glyphicon glyphicon-cutlery"></span>
+            {{ order.get_seller }}的订单 <small>{{ order.time }}</small>
+          </h4>
           {% for food in order.food_list.all %}
-            <li>{{ food.name }}</li>
+            <span class="food">{{ food.name }}</span>
           {% endfor %}
-          <a href="{% url 'market:finish-order' order.id %}" class="btn btn-danger">确认收货</a>
-          {% empty %}
-            <p>暂无</p>
-          {% endfor %}
-        </div>
+        {% empty %}
+          <p>暂无</p>
+        {% endfor %}
       </div>
     </div>
-    <div class="col-sm-4">
-      <div class="panel panel-default text-center">
-        <div class="panel-heading">
-          <h1>已完成的订单</h1>
-        </div>
-        <div class="panel-body">
-          {% for order in finished_orders %}
-          <h3>{{ order.get_seller }}的订单</h3>
-          <small>{{ order.time }}</small>
-            {% for food in order.food_list.all %}
-              <li>{{ food.name }}</li>
-            {% endfor %}
-          <a href="{% url 'market:comment' order.id %}">评价</a>
-          {% empty %}
-            <p>暂无</p>
+
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <h3>正在配送</h3>
+      </div>
+      <div class="panel-body">
+        {% for order in accepted_orders %}
+          <h4 class="order-title">
+            <span class="glyphicon glyphicon-cutlery"></span>
+            {{ order.get_seller }}的订单 <small>{{ order.time }}</small>
+          </h4>
+          {% for food in order.food_list.all %}
+            <span class="food">{{ food.name }}</span>
           {% endfor %}
-        </div>
+        <br><br>
+        <a href="{% url 'market:finish-order' order.id %}" class="btn btn-primary">确认收货</a>
+        {% empty %}
+          <p>暂无</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading text-center">
+        <h3>已完成的订单</h3>
+      </div>
+      <div class="panel-body">
+        {% for order in finished_orders %}
+          <h4 class="order-title">
+            <span class="glyphicon glyphicon-cutlery"></span>
+            {{ order.get_seller }}的订单 <small>{{ order.time }}</small>
+          </h4>
+          {% for food in order.food_list.all %}
+            <span class="food">{{ food.name }}</span>
+          {% endfor %}
+        <br><br>
+        {% if not order.has_commented %}
+          <a class="btn btn-primary" href="{% url 'market:comment' order.id %}">评价</a>
+        {% endif %}
+        {% empty %}
+          <p>暂无</p>
+        {% endfor %}
       </div>
     </div>
   </div>

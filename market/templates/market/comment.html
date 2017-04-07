@@ -1,25 +1,37 @@
 {% extends "base_market.html" %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/order.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock stylesheet %}
 
 {% block content %}
-  {% if has_commented %}
-    <h2>您已成功评价！</h2>
-  {% else %}
-    <h2>订单已完成！请评价一下吧~</h2>
-    <form action="{% url 'market:comment' order.id %}" method="POST">
-      {% csrf_token %}
-      <textarea name="body" rows="10" cols="48"></textarea>
-      <input type="submit"value="提交评价">
-    </form>
-  {% endif %}
+  <div class="page-header text-center">
+    <h2>评价商家</h2>
+  </div>
   
-  <h3>订单信息</h3>
-  <p>{{ order.get_seller }} ({{ order.status }})</p>
-  <small>{{ order.time }}</small>
-  <ul>
+  <form class="text-center" action="{% url 'market:comment' order.id %}"
+   method="POST" oninput="x.value=parseInt(rating.value)">
+    {% csrf_token %}
+    <p style="margin: 20px;">您的客观评价对其他用户来说很有价值。</p>
+    <textarea name="body" rows="10" cols="120"></textarea><br>
+    <div class="container">
+      <div class=" row rating justify-content-md-center">
+        <h3>评分</h3>
+        <input id="rating" type="range" min="0" max="5" step="1" name="rating" value="rating">
+        <output name="x" for="rating" style="font-size: 50px;"></output>
+      </div>
+    </div>
+    
+    <button type="submit" class="btn btn-primary submit-button">提交评价</button>
+  </form>
+  
+  <div class="container" style="padding: 0 40px 40px 40px;">
+    <h3 class="text-center">订单信息</h3><hr>
+    <h4>{{ order.get_seller }}的订单 <small>{{ order.time }}</small></h4>
     {% for food in order.food_list.all %}
-        <li>{{ food.name }}</li>
+      <span class="food">{{ food.name }}</span>
     {% endfor %}
-  </ul>
-
-  <a href="{% url 'market:home' %}">返回首页</a>
+  </div>
 {% endblock content %}

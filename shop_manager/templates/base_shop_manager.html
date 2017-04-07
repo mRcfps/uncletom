@@ -1,10 +1,26 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block navbar %}
-<p>
-  <a href="{% url 'shop_manager:shop-manage' %}">{{ shop.name }} 后台管理</a> - 
-  <a href="{% url 'shop_manager:new-food' %}">添加菜品</a> - 
-  <a href="{% url 'shop_manager:order-management' %}">订单管理</a>
-</p>
-    
-{% endblock navbar %}
+{% block shop_manage %}
+  <a href="{% url 'shop_manager:shop-manage' %}">店铺管理</a>
+{% endblock shop_manage %}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3">
+        <h3 class="text-center">{{ shop.name }}后台管理</h3><hr>
+        <ul class="nav nav-pills nav-stacked">
+          {% block tabs %}
+          {% endblock tabs %}
+        </ul>
+      </div>
+
+      <div class="col-md-9">
+        {% block managecontent %}
+        {% endblock managecontent %}
+      </div>
+    </div>
+  </div>  
+{% endblock content %}
+

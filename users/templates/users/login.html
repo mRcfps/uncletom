@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock stylesheet %}
 
 {% block content %}
   <div class="page-header text-center">
     <h2>登录您的帐号</h2>
   </div>
 
-  <form class="form-horizontal" role="form" action="{% url 'users:login' %}" method="POST">
+  <form class="form-horizontal myform" role="form" action="{% url 'users:login' %}" method="POST">
     {% csrf_token %}
     {% bootstrap_form form %}
 
     <div class="form-group">
       <div class="text-center">
-        <button class="btn btn-primary" type="submit">确认</button>
+        <button class="btn-lg btn-primary submit-button" type="submit">确 认</button>
       </div>
     </div>
 

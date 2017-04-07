@@ -4,15 +4,11 @@ footer {
     padding: 50px;
 }
 
+.navbar {
+    margin-bottom: 0;
+}
+
 a#powerformer:hover {
     text-decoration: none;
     color: red;
-}
-
-.shop-panel {
-    transition: box-shadow 0.5s;
-}
-
-.shop-panel:hover {
-    box-shadow: 5px 0px 40px rgba(0, 0, 0, .2);
 }

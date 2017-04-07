@@ -1,11 +1,25 @@
-{% extends "base_shop_manager.html" %}
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock stylesheet %}
 
 {% block content %}
-  <h2>添加新的菜品</h2>
-  <form enctype="multipart/form-data" action="{% url 'shop_manager:new-food' %}" method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
+  <div class="page-header text-center">
+    <h2>添加新菜品</h2>
+  </div>
 
-      <input type="submit" name="" value="确认">
+  <form enctype="multipart/form-data" class="form-horizontal myform" 
+   role="form" action="{% url 'users:register' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <div class="form-group">
+      <div class="text-center">
+        <button class="btn-lg btn-primary submit-button" type="submit">确认</button>
+      </div>
+    </div>
   </form>
 {% endblock content %}

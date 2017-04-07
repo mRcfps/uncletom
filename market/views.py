@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Shop, Food, Order, Comment
 from .forms import NewShopForm
-from common import orderoperators
+from common import orderoperators, commenthandler
 
 
 class HomeView(ListView):
@@ -167,15 +167,6 @@ class CommentView(View):
         return render(request, 'market/comment.html', context)
 
     def post(self, request, order_id):
-        new_comment = Comment()
-        new_comment.customer = request.user
-        new_comment.shop = Order.objects.get(id=order_id).get_seller()
-        new_comment.body = request.POST['body']
-        new_comment.save()
+        commenthandler.handle_comment(request, order_id)
 
-        context = {
-            'order': Order.objects.get(id=order_id),
-            'has_commented': True,
-        }
-
-        return render(request, 'market/comment.html', context)
+        return HttpResponseRedirect(reverse('market:my-orders'))

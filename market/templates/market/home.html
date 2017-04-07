@@ -1,42 +1,43 @@
-{% extends "base.html" %}
-{% load bootstrap3 %}
+{% extends "base_market.html" %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'market/css/home.css' %}">
+{% endblock stylesheet %}
+
+{% block shop_manage %}
+  {% if has_shop %}
+    <a href="{% url 'shop_manager:shop-manage' %}">我的店铺</a>
+  {% else %}
+    <a href="{% url 'market:new-shop' %}">我要开店</a>
+  {% endif %}
+{% endblock shop_manage %}
 
 {% block content %}
-  <div class="container">
+  <div class="container-fluid">
     <div class="jumbotron">
       <h1>欢迎来到汤姆叔叔的能量站</h1>
       <p>在这里，享受一场属于美食的盛宴。</p>
-      {% if has_shop %}
-      <a href="{% url 'shop_manager:shop-manage' %}">我的店铺</a>
-      {% else %}
-        <a href="{% url 'market:new-shop' %}">我要开店</a>
-      {% endif %}
     </div>
+  </div>
     
-    <div class="row">
+  <div class="container-fluid">
+    <div class="row justify-content-md-center" style="margin: 20px;">
       {% for shop in shops %}
-        <div class="col-md-6 panel panel-default shop-panel">
+        <div class="col-md-5 panel panel-default shop-panel" style="margin: 20px;">
           <a href="{% url 'market:shop-detail' shop.id %}">
             <div class="row">
-              <div class="col-md-3 text-center">
-                <img src="{{ shop.logo.url }}" height="150" width="150">
+              <div class="col-md-4">
+                <img src="{{ shop.logo.url }}" height="120" width="120">
               </div>
-              <div class="col-md-9">
-                <h3>{{ shop.name }}</h3><hr>
-                <p>销量 {{ shop.sale_num }} 单</p>
-                <p>评分 {{ shop.rating }} </p>
+              <div class="col-md-8">
+                <h3>{{ shop.name }} <small>销量 {{ shop.sale_num }} 单</small></h3><hr>
+                <p>评分 {{ shop.rating|floatformat:1 }} </p>
               </div>
             </div>
           </a>
         </div>
-      {% empty %}
-        <p>您附近没有商家。</p>
       {% endfor %}
     </div>
-    
-
-
   </div>
-  
-
 {% endblock content %}

@@ -50,6 +50,7 @@ class Order(models.Model):
         choices=STATUS_CHOICE,
         default='paid',
     )
+    has_commented = models.BooleanField(default=False)
     time = models.DateTimeField(auto_now_add=True)
 
     class Meta:

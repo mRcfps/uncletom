@@ -1,0 +1,12 @@
+.add-food {
+    margin: 30px;
+}
+
+.btn-add-food {
+    border: 1px solid black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}

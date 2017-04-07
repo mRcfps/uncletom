@@ -1,10 +1,26 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+{% block stylesheet %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock stylesheet %}
 
 {% block content %}
-  <form action="{% url 'users:register' %}" method="POST">
-      {% csrf_token %}
-      {{ form.as_p }}
+  <div class="page-header text-center">
+    <h2>新用户注册</h2>
+  </div>
 
-      <input type="submit" value="注册">
+  <form class="form-horizontal myform" role="form" action="{% url 'users:register' %}" method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+
+    <div class="form-group">
+      <div class="text-center">
+        <button class="btn-lg btn-primary submit-button" type="submit">注册</button>
+      </div>
+    </div>
+
+    <input type="hidden" name="next" value="{{ next }}">
   </form>
 {% endblock content %}
