@@ -58,16 +58,20 @@ class Order(models.Model):
         verbose_name_plural = verbose_name
 
     def show_food_list(self):
-        '''A method to fetch the food list and return a string,
-        used in OrderAdmin in this project.'''
+        """
+        A method to fetch the food list and return a string,
+        used in OrderAdmin in this project.
+        """
         result = ''
         for food in self.food_list.all():
             result += food.name + ' '
         return result.rstrip()
 
     def get_seller(self):
-        '''A shortcut method to know this order's seller
-        without bringing redundancy to the database schema'''
+        """
+        A shortcut method to know this order's seller
+        without bringing redundancy to the database schema
+        """
         return self.food_list.all()[0].seller
 
     def __str__(self):

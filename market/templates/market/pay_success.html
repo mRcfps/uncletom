@@ -6,9 +6,11 @@
   </div>
 
   <div class="container text-center">
-    <h3>现在您可以</h3>
+    <h3>现在您可以</h3><br><br>
 
-    <a href="{% url 'market:home' %}" class="btn-lg btn-primary">返回首页</a>
-    <a href="{% url 'market:my-orders' %}" class="btn-lg btn-primary">查看我的订单</a>
+    <div class="container text-center" style="padding-bottom: 350px;">
+      <a href="{% url 'market:home' %}" class="btn-lg btn-primary">返回首页</a>
+      <a href="{% url 'market:my-orders' %}" class="btn-lg btn-primary">查看我的订单</a>
+    </div>
   </div>
 {% endblock content %}
